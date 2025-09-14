@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D A R K</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Start Button Overlay */
+    #start-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10000;
+    }
+
+    .start-btn {
+      padding: 15px 40px;
+      font-size: 1.5rem;
+      color: rgba(220,220,200,0.8);
+      background: transparent;
+      border: 2px solid rgba(220,220,200,0.8);
+      cursor: pointer;
+      letter-spacing: 0.3em;
+      transition: 0.3s;
+    }
+
+    .start-btn:hover {
+      background: rgba(220,220,200,0.8);
+      color: #000;
+    }
+
+    /* Fullscreen intro video */
+    #intro-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 9999;
+      display: none;
+    }
+
+    /* Landing overlay */
+    #landing {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    #landing.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      letter-spacing: 0.6em;
+      color: rgba(220,220,200,0.8);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    #triquetra {
+      width: 200px;
+      height: 200px;
+      margin: 20px 0;
+      opacity: 0.7;
+    }
+
+    #outside, #inside {
+      fill: transparent;
+      stroke-dasharray: 2300;
+    }
+
+    #outside {
+      stroke: #8B948D;
+      animation: outside 2.5s linear forwards;
+    }
+
+    #inside {
+      stroke: #FFB30D;
+      animation: inside 2.5s linear forwards;
+    }
+
+    @keyframes inside {
+      from { stroke-dashoffset: 2300; }
+      to   { stroke-dashoffset: 4600; }
+    }
+
+    @keyframes outside {
+      from { stroke-dashoffset: 2300; }
+      to   { stroke-dashoffset: 0; }
+    }
+
+    .enter-btn {
+      margin-top: 30px;
+      padding: 10px 25px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: rgba(220,220,200,0.8);
+      letter-spacing: 0.3em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .enter-btn:hover {
+      background: rgba(200,200,200,0.8);
+      color: #000;
+    }
+
+    /* Main page */
+    #main {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      color: white;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    #main.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .connected {
+      font-size: 1.2rem;
+      color: rgba(0,255,0,0.8);
+      margin-top: 15px;
+      letter-spacing: 0.2em;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.4; }
+    }
+
+    .rahul {
+      font-size: 1.5rem;
+      color: #ffb30d;
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .rahul.visible {
+      opacity: 1;
+    }
+
+    .enter-btnT {
+      margin-top: 30px;
+      padding: 10px 25px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: rgba(220,220,200,0.8);
+      letter-spacing: 0.3em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .enter-btnT:hover {
+      background: rgba(200,200,200,0.8);
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <button class="start-btn" onclick="startVideo()">START</button>
+  </div>
+
+  <!-- Fullscreen Intro Video -->
+  <video id="intro-video">
+    <source src="intro.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Landing Screen -->
+  <div id="landing" class="hidden">
+    <div class="title">D A R ꓘ</div>
+    <svg version="1.1" id="triquetra" xmlns="http://www.w3.org/2000/svg" viewBox="11 97 634 600">
+      <g transform="translate(-11.44,612.44)scale(1.19,-1.19)">
+        <path id="outside" stroke-width="4" d="M525.2-12.5c0,132.5-107.5,240-240,240s-240-107.5-240-240c36.5-21.1,77.9-32.2,120-32.2
+          c132.5,0,240,107.5,240,240c0,85.7-45.7,165-120,207.8c-74.3-42.9-120-122.1-120-207.8c0-132.5,107.5-240,240-240
+          C447.4-44.7,488.8-33.6,525.2-12.5z"/>
+      </g>
+      <g transform="translate(-11.44,612.44)scale(1.19,-1.19)">
+        <path id="inside" stroke-width="4" d="M516.8-9.2c0,132.5-112.9,230.9-231.6,229.8C165.9,219.4,53.6,125,53.6-7.5C90.1-28.6,124.9-38.7,167-37.7
+          c118.2,2.8,231.1,96.6,231.1,229.1c0,85.7-43.4,162.1-112.9,203.4c-68.3-41.3-111.9-118.1-111.9-203.9
+          c0-132.5,114.1-228.7,233.5-228.6C448.9-37.7,479.8-26.6,516.8-9.2z"/>
+      </g>
+    </svg>
+    <button class="enter-btn" onclick="showLanding()">CONNECT</button>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main">
+    <div>BUG BOUNTY CTF PRESENTS OSINT Challenge!</div>
+    <div class="connected">🟢 YOU ARE CONNECTED</div>
+    <div id="rahul" class="rahul">I AM RAHUL</div>
+    <button class="enter-btnT" onclick="enterChallenge()">ENTER THE CHALLENGE</button>
+  </div>
+
+  <script>
+    const startScreen = document.getElementById('start-screen');
+    const video = document.getElementById('intro-video');
+    const landing = document.getElementById('landing');
+    const main = document.getElementById('main');
+    const rahul = document.getElementById('rahul');
+
+    function startVideo() {
+      startScreen.style.display = 'none';
+      video.style.display = 'block';
+      video.play();
+    }
+
+    // When video ends, show landing
+    video.addEventListener('ended', () => {
+      video.style.display = 'none';
+      landing.classList.remove('hidden');
+    });
+
+    // Show landing manually on button click
+    function showLanding() {
+      landing.classList.add('hidden');
+      main.classList.add('visible');
+
+      // Show "I AM RAHUL" after 5 seconds
+      setTimeout(() => {
+        rahul.classList.add('visible');
+      }, 5000);
+    }
+
+    // Redirect after button click
+    function enterChallenge() {
+      setTimeout(() => {
+        window.location.href = 'rahul.html';
+      }, 5000);
+      document.querySelector('.enter-btnT').innerText = "Redirecting...";
+    }
+  </script>
+
+</body>
+</html>
