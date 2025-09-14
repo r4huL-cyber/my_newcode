@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DARK OSINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text-color: rgba(220, 220, 200, 0.85);
+      --highlight: #FFB30D;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    /* INTRO (Landing Animation) */
+    #intro {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 4s; /* time before revealing main */
+    }
+
+    #intro h1 {
+      font-size: 2rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1s;
+    }
+
+    #intro svg {
+      width: 180px;
+      height: 180px;
+      opacity: 0.6;
+      margin-bottom: 2vh;
+      animation: pulse 2.5s infinite;
+    }
+
+    /* MAIN PAGE (hidden at first) */
+    #main {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s ease;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #main.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .title {
+      font-size: 3rem;
+      letter-spacing: 0.5em;
+      margin-bottom: 0.3em;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      letter-spacing: 0.3em;
+      color: var(--highlight);
+      margin-bottom: 2em;
+    }
+
+    .cta {
+      padding: 12px 30px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-color);
+      background-color: black;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cta:hover {
+      background: var(--highlight);
+      color: #000;
+    }
+
+    /* Keyframes */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+  <!-- INTRO LANDING -->
+  <div id="intro">
+    <svg viewBox="11 97 634 600" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-11.44,612.44)scale(1.19,-1.19)">
+        <path id="outside" stroke="#8B948D" stroke-width="3" fill="none" d="M525.2-12.5c0,132.5-107.5,240-240,240s-240-107.5-240-240c36.5-21.1,77.9-32.2,120-32.2
+          c132.5,0,240,107.5,240,240c0,85.7-45.7,165-120,207.8c-74.3-42.9-120-122.1-120-207.8c0-132.5,107.5-240,240-240
+          C447.4-44.7,488.8-33.6,525.2-12.5z"/>
+      </g>
+      <g transform="translate(-11.44,612.44)scale(1.19,-1.19)">
+        <path id="inside" stroke="#FFB30D" stroke-width="3" fill="none" d="M516.8-9.2c0,132.5-112.9,230.9-231.6,229.8C165.9,219.4,53.6,125,53.6-7.5C90.1-28.6,124.9-38.7,167-37.7
+          c118.2,2.8,231.1,96.6,231.1,229.1c0,85.7-43.4,162.1-112.9,203.4c-68.3-41.3-111.9-118.1-111.9-203.9
+          c0-132.5,114.1-228.7,233.5-228.6C448.9-37.7,479.8-26.6,516.8-9.2z"/>
+      </g>
+    </svg>
+    <h1>D A R ꓘ</h1>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div id="main">
+    <h1 class="title">D A R ꓘ</h1>
+    <h2 class="subtitle">O S I N T</h2>
+    <button class="cta">ENTER THE CHALLENGE</button>
+  </div>
+
+  <script>
+    // Show main page after intro finishes
+    setTimeout(() => {
+      document.getElementById("main").classList.add("show");
+    }, 4500); // 4.5s delay matches intro fade
+  </script>
+</body>
+</html>
